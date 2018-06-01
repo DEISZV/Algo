@@ -9,75 +9,63 @@ namespace Algo
     class Program
     {
         static void Main(string[] args)
-            
+
         {
             List<MenuItem> list = new List<MenuItem>();
             // Création liste Menu avec Item
-
+           
             {
-                new MenuItem { Numero = 1, Libelle = "Menu 1" };
+           
+                new MenuItem { Numero = 1, Libelle = "Menu 1",  };
                 new MenuItem { Numero = 3, Libelle = "Menu 3" };
                 new MenuItem { Numero = 4, Libelle = "Menu 4" };
+
+
+
             };
 
-            int resultat = GererMenu(list);
+            Menu menu = new Menu();
+            menu.InsererLigne(new MenuItem { Numero = 1, Libelle = "menu 1" });
+            menu.InsererLigne(new MenuItem { Numero = 3, Libelle = "menu 3" });
+            menu.InsererLigne(new MenuItem { Numero = 3, Libelle = "menu 3BIS" });
+            menu.InsererLigne(new MenuItem { Numero = 4, Libelle = "menu 4" });
+
+            menu.Afficher();
+
+            int resultat = menu.Choisir();      
             Console.WriteLine(resultat);
             Console.ReadLine();
+        
+
         }
-
-
-        /// <summary>
-        /// Affiche un menu, test et récupère la saisie de l'utilisateur
-        /// </summary>
-        /// <param name="menu">La liste des choix possible</param>
-        /// <returns>choix utilisateur</returns>
+       
+ 
+    /// <summary>
+    /// Affiche un menu, test et récupère la saisie de l'utilisateur
+    /// </summary>
+    /// <param name="menu">La liste des choix possible</param>
+    /// <returns>choix utilisateur</returns>
         private static int GererMenu(List<MenuItem> menu)
 
-        {   // Affiche les éléments du Menu
+        {   
             foreach (MenuItem ligne in menu)
-                
             {
-                Console.WriteLine($"{ligne.Numero}-{ligne.Libelle}");
-
+                Console.WriteLine($"{ligne.Numero} et {ligne.Libelle}");
             }
 
-            // Récup choix utilisateur 
-            Console.WriteLine("Saisir un choix");
             int choix;
             choix = int.Parse(Console.ReadLine());
-
-            // test du choix par rapport aux éléments du Menu
-            while (true)
-            
+           
+            foreach (MenuItem item in menu)
             {
-                foreach (MenuItem item in menu)
-                {
-                    if (choix == item.Numero)
-                    {
-                        return choix;
-                    }
-
-
-                }
-
-                Console.WriteLine("Erreur lors de la saisie");
-                choix = int.Parse(Console.ReadLine());
-               
+                if (choix == item.Numero)
+                    return choix;
             }
 
-            // return -1;
+            Console.WriteLine("erreur dans la saisie");
+                return -1;
+            
         }
-
-        /// <summary>
-        /// Représente une ligne du menu
-        /// </summary>
-        class MenuItem
-
-        {
-            public int Numero { get; set; }
-            public string Libelle { get; set; }
-
-        }
-
+        
     }
 }
