@@ -11,15 +11,29 @@ namespace Algo
         static void Main(string[] args)
             
         {
-           
+            List<MenuItem> list = new List<MenuItem>();
+            // Création liste Menu avec Item
 
+            {
+                new MenuItem { Numero = 1, Libelle = "Menu 1" };
+                new MenuItem { Numero = 3, Libelle = "Menu 3" };
+                new MenuItem { Numero = 4, Libelle = "Menu 4" };
+            };
 
-
+            int resultat = GererMenu(list);
+            Console.WriteLine(resultat);
+            Console.ReadLine();
         }
 
+
+        /// <summary>
+        /// Affiche un menu, test et récupère la saisie de l'utilisateur
+        /// </summary>
+        /// <param name="menu">La liste des choix possible</param>
+        /// <returns>choix utilisateur</returns>
         private static int GererMenu(List<MenuItem> menu)
 
-        {
+        {   // Affiche les éléments du Menu
             foreach (MenuItem ligne in menu)
                 
             {
@@ -27,23 +41,36 @@ namespace Algo
 
             }
 
+            // Récup choix utilisateur 
+            Console.WriteLine("Saisir un choix");
             int choix;
             choix = int.Parse(Console.ReadLine());
 
-            foreach (MenuItem item in menu)
+            // test du choix par rapport aux éléments du Menu
+            while (true)
+            
             {
-                if (choix == item.Numero)
+                foreach (MenuItem item in menu)
                 {
-                    return choix;
+                    if (choix == item.Numero)
+                    {
+                        return choix;
+                    }
+
+
                 }
-                
-                
+
+                Console.WriteLine("Erreur lors de la saisie");
+                choix = int.Parse(Console.ReadLine());
+               
             }
-            Console.WriteLine("Erreur lors de la saisie");
-            return -1;
-        
+
+            // return -1;
         }
 
+        /// <summary>
+        /// Représente une ligne du menu
+        /// </summary>
         class MenuItem
 
         {
